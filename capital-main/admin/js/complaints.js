@@ -15,9 +15,12 @@ async function fetchComplaints() {
 		tableBody.innerHTML = "";
 
 		complaints.forEach((complaint) => {
+			const username = complaint.user?.name || "Unknown User";
+			const driverName = complaint.driver?.name || "N/A";
+
 			const row = `<tr>
-                <td>${complaint.user.name}</td>
-                <td>${complaint.driver?.name || "N/A"}</td>
+                <td>${username}</td>
+                <td>${driverName}</td>
                 <td>${complaint.description}</td>
                 <td>${complaint.status}</td>
                 <td>
