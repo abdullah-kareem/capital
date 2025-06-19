@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const path = require("path"); // new for production
 const routes = require("./routes");
 const { errorHandler } = require("./middleware/errorMiddleware");
 
@@ -10,11 +11,13 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// Routes
+// Serve static admin panel
+app.use("/admin", express.static(path.join(__dirname, "admin"))); // new for production
+
+// API Routes
 app.use("/api", routes);
 
-// Global Error Handling Middleware
+// Error Handler
 app.use(errorHandler);
 
 module.exports = app;
-    
